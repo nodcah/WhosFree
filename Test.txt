@@ -1,0 +1,108 @@
+CHEM 1147Q - Honors General Chemistry
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+4.00
+Honors Credit
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+4453
+074
+Lecture
+TuTh 11:00AM - 12:15PM
+CHM A203
+Rajeswari Kasi
+08/29/2016 - 12/09/2016
+4454
+078L
+Laboratory
+Th 2:00PM - 5:00PM
+CHM T211
+Caterina Riccardi, 
+Rajeswari Kasi
+08/29/2016 - 12/09/2016
+CSE 1729 - Intro to Principle Programming
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+3.00
+Graded
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+14594
+011
+Lecture
+MoWe 10:10AM - 11:00AM
+UTEB 175
+Gregory Johnson
+08/29/2016 - 12/09/2016
+14598
+014L
+Laboratory
+Tu 2:00PM - 3:50PM
+ITE 138
+Gregory Johnson, 
+Levon Nazaryan
+08/29/2016 - 12/09/2016
+ECON 1201 - Principles of Microeconomics
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+3.00
+Honors Credit
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+6752
+002
+Lecture
+MoWeFr 12:20PM - 1:10PM
+OAK 104
+Richard Langlois
+08/29/2016 - 12/09/2016
+ENGR 1000 - Orientation to Engineering
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+1.00
+Sat./Unsat.
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+3586
+001
+Lecture
+WeFr 1:25PM - 2:15PM
+TLS 154
+Kevin McLaughlin
+08/29/2016 - 12/09/2016
+MATH 2210Q - Applied Linear Algebra
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+3.00
+Graded
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+15076
+013
+Lecture
+TuTh 9:30AM - 10:45AM
+MONT 321
+Charles Paquette
+08/29/2016 - 12/09/2016
+UNIV 1784 - Freshman Honors Seminar
+Status	Units	Grading	Grade	Deadlines
+Enrolled
+1.00
+Honors Credit
+ 
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+7681
+011
+Seminar
+MoWe 2:30PM - 3:20PM
+GENT 319
+Allison Hopkins, 
+Jaclyn Chancey, 
+Paula Wilmot
+08/29/2016 - 12/09/2016
