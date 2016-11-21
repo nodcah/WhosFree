@@ -11,16 +11,13 @@
 
 // Custom time class
 // hour=hour (int), min=minute (int), am=T for AM & F for PM (boolean)
-function Time(day, hour, min, am) {
+function Time(day, hour, min) {
     this.day = day; // 1=mon, 2=tue, 3=wed, 4=thu, 5=fri
-    this.hour = hour;
+    this.hour = hour; //24 hour format
     this.min = min;
-    this.am = am;
 
     this.lt = function (t) {
-        if (this.am && t.pm) return false;
-        else if (this.pm && t.am) return true;
-        else if (this.hour > t.hour) return false;
+        if (this.hour > t.hour) return false;
         else if (this.hour < t.hour) return true;
         else return (this.min < t.min);
     }
@@ -53,7 +50,7 @@ function Schedule() {
 // Gets current time
 function currentTime() {
     d = new Date();
-    return new Time(d.getDay(), d.getHours() % 12 + 1, d.getMinutes(), d.getHours() < 12);
+    return new Time(d.getDay(), d.getHours(), d.getMinutes());
 }
 
 // Function to search the webpage and save as local data
@@ -69,6 +66,10 @@ function currentTime() {
 $(document).ready(function () {
     $('select').material_select();
 
+    var test1 = new Time(1, 0, 1);
+    var test2 = new Time(1, 1, 5);
+    console.log(test1.lt(test2));
+    console.log(currentTime().min);
 
 })
 
