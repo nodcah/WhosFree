@@ -5,7 +5,7 @@
 
 // ===== VARIABLES =====
 // Array of all of the schedules
-var schedules = {};
+var schedules = [];
 
 //Const with weekdays
 const weekdays = {
@@ -45,11 +45,16 @@ function Schedule(name) {
     this.name = name; // name of person to whom this schedule belongs
     //returns whether schedule is free at given time
     this.isFree = function (t) {
-        let dailyCourses = this.courses[t.day];
+        d = new Date();
+        let dailyCourses = this.courses[d.getDay()];
+        if (!dailyCourses) return true;
         for (let course of dailyCourses) {
             if (course["start"].lt(t) && t.lt(course["end"])) return false;
         }
         return true;
+    }
+    this.isEmpty = function () {
+        return this.courses[1].length == 0 && this.courses[2].length == 0 && this.courses[3].length == 0 && this.courses[4].length == 0 && this.courses[5].length == 0;
     }
 }
 
@@ -66,6 +71,7 @@ function currentTime() {
 function textToSchedule(name, text) {
     let sched = new Schedule(name);
     let times = text.match(/\n(Mo|Tu|We|Th|Fr)( |Mo|Tu|We|Th|Fr).*/gm);
+    if (!times) return sched;
     for (let t of times) {
         let days = [];
         t = t.substring(1); // Take out \n
@@ -105,19 +111,26 @@ function textToSchedule(name, text) {
         console.log(sched);
         console.log("");
     }
+    return sched;
 }
-// Reloads table with given time (default time: current time)
-function updateTable() {
-    for (s of schedules) {
-
+// Reloads table with given time
+function updateTable(t = currentTime()) {
+    let table = $("#people");
+    table.html("");
+    for (let i = 0; i < schedules.length; i++) {
+        let s = schedules[i];
+        table.append(`<div class="row" style="background-color:#e8e4ef;" id="row"` + i + `"><div class="col s2" style="color: ` + (s.isFree(t) ? "green" : "red") + `;">⬤</div><div class = "col s10">` + s.name + `</div></div>`);
     }
 }
 
 // ===== EVENT LISTENERS =====
 // Listener for button press
 function clicked() {
-    if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val())) {
-        schedules.push(textToSchedule($("#nameText").val(), $("#schedText").val()));
+    let s = textToSchedule($("#nameText").val(), $("#schedText").val());
+    if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val()) && !s.isEmpty()) {
+        schedules.push(s)
+        $("#schedText").val("");
+        $("#nameText").val("");
     }
     updateTable();
 }
@@ -125,8 +138,8 @@ function clicked() {
 // ===== MAIN =====
 $(document).ready(function () {
     $('select').material_select();
-
-
+    updateTable();
+    setInterval(updateTable, 30000); // Updates table every once in a while
 })
 
 
