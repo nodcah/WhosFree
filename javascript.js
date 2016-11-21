@@ -4,11 +4,11 @@
 
 
 // ===== VARIABLES =====
-// Array of
+// Assosciative array of schedules with names
+var people = {};
 
 
 // ===== CUSTOM CLASSES =====
-
 // Custom time class
 // hour=hour (int), min=minute (int), am=T for AM & F for PM (boolean)
 function Time(day, hour, min) {
@@ -53,7 +53,7 @@ function currentTime() {
     return new Time(d.getDay(), d.getHours(), d.getMinutes());
 }
 
-// Function to search the webpage and save as local data
+// Function to search the text and save as local data
 
 // Reloads table with given time (default time: current time)
 
@@ -66,15 +66,24 @@ function currentTime() {
 $(document).ready(function () {
     $('select').material_select();
 
-    var test1 = new Time(1, 0, 1);
-    var test2 = new Time(1, 1, 5);
-    console.log(test1.lt(test2));
-    console.log(currentTime().min);
-
 })
 
 
 
 
+/*
+var test1 = new Time(1, 11, 0);
+    var test2 = new Time(1, 11, 50);
+    console.log(test1.lt(test2));
+    console.log(currentTime().min);
 
+    var s = new Schedule();
+    console.log(s.isFree(test1));
+    s.courses[1] = [[test1, test2]];
+    console.log(s.isFree(new Time(1, 11, 12)));
+    console.log(s.isFree(new Time(1, 11, 0)));
+    console.log(s.isFree(new Time(1, 11, 45)));
+    console.log(s.isFree(new Time(1, 10, 12)));
+    console.log(s.isFree(new Time(1, 12, 12)));
+*/
 //End
