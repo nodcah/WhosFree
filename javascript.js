@@ -45,6 +45,7 @@ function Schedule() {
     }
 }
 
+
 // ===== HELPER FUNCTIONS =====
 
 // Gets current time
@@ -54,7 +55,9 @@ function currentTime() {
 }
 
 // Function to search the text and save as local data
-
+function textToSchedule(text) {
+    const regex = /\n(Mo|Tu|We|Th|Fr)( |Mo|Tu|We|Th|Fr).*/gm;
+}
 // Reloads table with given time (default time: current time)
 
 
