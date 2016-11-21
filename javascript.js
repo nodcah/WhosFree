@@ -1,11 +1,11 @@
 // javascript.js
 // Desc: all of the javascript to run the "Who's Free?" web app
-// Authoer: Noah Del Coro
+// Auther: Noah Del Coro
 
 
 // ===== VARIABLES =====
-// Assosciative array of schedules with names
-var people = {};
+// Array of all of the schedules
+var schedules = {};
 
 //Const with weekdays
 const weekdays = {
@@ -32,17 +32,18 @@ function Time(hour, min) {
 
 // Schedule object
 // Creates a schedule for each person
-function Schedule() {
+function Schedule(name) {
     // courses contains all classes each day
     // A course is an object w/ 2 elements in it: "start" Time + "end" Time
     this.courses = {
-            1: [], // mon
-            2: [], // tue
-            3: [], // wed
-            4: [], // thu
-            5: [] // fri
-        }
-        //returns whether schedule is free at given time
+        1: [], // mon
+        2: [], // tue
+        3: [], // wed
+        4: [], // thu
+        5: [] // fri
+    };
+    this.name = name; // name of person to whom this schedule belongs
+    //returns whether schedule is free at given time
     this.isFree = function (t) {
         let dailyCourses = this.courses[t.day];
         for (let course of dailyCourses) {
@@ -62,14 +63,14 @@ function currentTime() {
 }
 
 // Function to search the text and save as local data
-function textToSchedule(text) {
-    let sched = new Schedule();
+function textToSchedule(name, text) {
+    let sched = new Schedule(name);
     let times = text.match(/\n(Mo|Tu|We|Th|Fr)( |Mo|Tu|We|Th|Fr).*/gm);
     for (let t of times) {
-        let days = []
+        let days = [];
         t = t.substring(1); // Take out \n
 
-        console.log("t@1\t" + t);
+        console.log(t);
 
         while (t.substring(0, 1) != " ") { // while t starts w/ day of week
             days.push(weekdays[t.substring(0, 2)]);
@@ -77,21 +78,21 @@ function textToSchedule(text) {
         }
         t = t.substring(1); //remove space
 
-        console.log("Days:\t" + days);
-        console.log("t@2\t" + t);
+        console.log("Days: " + days);
+        console.log("t: " + t);
 
 
         let t1 = new Time(
-            Number(/\d+(?=:)/.exec(t)) + Number(/AM(?= )/.test(t) ? 0 : 12),
-            Number(/\d{2}(?=(?:AM|PM))/.exec(t)))
+            Number(/\d+(?=:)/.exec(t)) + Number((/PM(?= )/.test(t) && Number(/\d+(?=:)/.exec(t)) != 12) ? 12 : 0),
+            Number(/\d{2}(?=(?:AM|PM))/.exec(t)));
         t = t.substring(9); // jump to next date
 
         console.log("t1: " + t1.hour + ":" + t1.min);
-        console.log("t@3\t" + t);
+        console.log("t: " + t);
 
         let t2 = new Time(
-            Number(/\d+(?=:)/.exec(t)) + Number(/AM(?= )/.test(t) ? 0 : 12),
-            Number(/\d{2}(?=(?:AM|PM))/.exec(t)))
+            Number(/\d+(?=:)/.exec(t)) + Number((/PM/.test(t) && Number(/\d+(?=:)/.exec(t)) != 12) ? 12 : 0),
+            Number(/\d{2}(?=(?:AM|PM))/.exec(t)));
 
         console.log("t2: " + t2.hour + ":" + t2.min);
 
@@ -99,26 +100,34 @@ function textToSchedule(text) {
             sched.courses[day].push({
                 "start": t1,
                 "end": t2
-            })
+            });
         }
-        console.log("sched:");
         console.log(sched);
+        console.log("");
     }
 }
 // Reloads table with given time (default time: current time)
+function updateTable() {
+    for (s of schedules) {
 
+    }
+}
 
 // ===== EVENT LISTENERS =====
 // Listener for button press
-
+function clicked() {
+    if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val())) {
+        schedules.push(textToSchedule($("#nameText").val(), $("#schedText").val()));
+    }
+    updateTable();
+}
 
 // ===== MAIN =====
 $(document).ready(function () {
     $('select').material_select();
-    test = "\nTh 2:00PM - 5:00PM";
-    textToSchedule(test);
-})
 
+
+})
 
 
 
