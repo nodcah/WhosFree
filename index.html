@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>Who's Free?</title>
 
+    <!-- JQuery-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -15,29 +18,40 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col m1">Name:</div>
-            <div class="col m3">
-                <!-- Name text box -->
-            </div>
-            <div class="col m1">Schedule:<a target="_blank" src="help.html" <i class="material-icons">info</i></div>
-            <div class="col m6">
-                <!-- Schedule text box -->
-            </div>
-            <div class="col m1"><i class="material-icons">done</i></div>
+    <header>
+        <div class="valign-wrapper" style="background: linear-gradient(to bottom, #8c9eff 0%,#b2beff 100%); height: 6em; justify-content: center;">
+            <h3 class="valign" style="color: rgb(34, 26, 47); font-weight:300;">Who's Free?</h3>
         </div>
-        <div class="row">
-            <div class="col s12">
-                <h3 class="center-align">Who's Free?</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container" id="people">
-        <div class="row"></div>
-    </div>
+    </header>
 
-    <!-- Table with people -->
-    <!-- Continue comments here -->
+    <main>
+        <div class="container">
+            <div class="row card-panel grey lighten-3 flow-text" id="input">
+                <div class="input-field col s4">
+                    <!-- Name text box -->
+                    <input type="text" id="nameText" class="validate"></input>
+                    <label for="nameText">Name</label>
+                </div>
+                <div class="input-field col s7">
+                    <!-- Schedule text box -->
+                    <textarea id="schedText" style="border: solid 0px #9e9e9e; border-bottom-width: 1px; resize: none; width:90%"></textarea>
+                    <label for="schedText">Schedule</label>
+                    <a target="_blank" href="help.html" style="width:10%;"><i class="material-icons">info</i></a>
+                </div>
+                <div class="col s1"><a class="btn-floating waves-effect waves-light indigo accent-1" style="margin-top:.4em;"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+            <br />
+            <!-- Table with people -->
+            <div class="container" id="people">
+            </div>
+    </main>
+
+    <footer class="footer-copyright indigo accent-2">
+        <div class="valign-wrapper container white-text" style="height: 3em;">
+            <span class="valign" style="font-weight:300;">© 2016 Noah Del Coro</span>
+        </div>
+
+    </footer>
 </body>
 </html>

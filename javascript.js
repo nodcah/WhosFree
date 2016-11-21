@@ -37,3 +37,14 @@ function Time(hour, min, am) {
 
 
 // ===== MAIN =====
+$(document).ready(function () {
+    $('select').material_select();
+
+
+})
+
+
+
+
+
+//End
