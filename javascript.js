@@ -135,9 +135,15 @@ function clicked() {
     updateTable();
 }
 
+function moved(pos, val) {
+
+}
+
 // ===== MAIN =====
 $(document).ready(function () {
     $('select').material_select();
+    //$('input[type="range"]').onmo
+
     updateTable();
     setInterval(updateTable, 30000); // Updates table every once in a while
 })
