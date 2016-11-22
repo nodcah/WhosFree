@@ -64,9 +64,31 @@ function Schedule(name) {
 // Gets current time
 function currentTime() {
     d = new Date();
-    return new Time(d.getHours(), d.getMinutes());
+    return new Time(Number(d.getHours()), Number(d.getMinutes()));
 }
 
+// Gets time from range slider
+function getTime() {
+    let slideVal = Number($("#slide").val());
+    let now = currentTime();
+    let temp = new Time(0, 0);
+
+    if (now.min + slideVal >= 60) {
+        temp.hour = now.hour + 1;
+        temp.min = (now.min + slideVal) - 60;
+    } else if (now.min + slideVal < 0) {
+        temp.hour = now.hour - 1;
+        temp.min = (now.min + slideVal) + 60;
+    } else {
+        temp.hour = now.hour;
+        temp.min = now.min + slideVal;
+    }
+
+    $("#time").text(temp.hour % 12 + ":" + (temp.min / 10 < 1 ? "0" + temp.min : temp.min));
+
+    updateTable(temp);
+
+}
 // Function to search the text and save as local data
 function textToSchedule(name, text) {
     let sched = new Schedule(name);
@@ -135,17 +157,14 @@ function clicked() {
     updateTable();
 }
 
-function moved(pos, val) {
-
-}
-
 // ===== MAIN =====
 $(document).ready(function () {
     $('select').material_select();
-    //$('input[type="range"]').onmo
+    $('#slide').on("change mousemove", getTime);
 
     updateTable();
-    setInterval(updateTable, 30000); // Updates table every once in a while
+    setInterval(getTime, 5000); // Updates time/table every once in a while
+
 })
 
 
