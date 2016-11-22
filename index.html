@@ -38,7 +38,7 @@
                     <!-- Schedule text box -->
                     <textarea id="schedText" style="border: solid 0px #9e9e9e; border-bottom-width: 1px; resize: none; width:90%"></textarea>
                     <label for="schedText">Schedule</label>
-                    <a target="_blank" href="help.html" style="width:10%;"><i class="material-icons">info</i></a>
+                    <a href="#modal" style="width:10%;"><i class="material-icons">info</i></a>
                 </div>
                 <div class="col s1"><a class="btn-floating waves-effect waves-light indigo accent-1" style="margin-top:.4em;" onclick="clicked()"><i class="material-icons">add</i></a>
                 </div>
@@ -50,14 +50,29 @@
                         <!-- Slider -->
                         <input id="slide" type="range" min="-60" max="60" value="0" data-orientation="horizontal">
                     </div>
-                    <div class="col s2" id="time"></div>
+                    <div class="col s2 flow-text" id="time"></div>
                 </div>
             </div>
             <br />
             <!-- Table with people -->
             <div class="container flow-text" id="people">
             </div>
+
+            <div id="modal" class="modal">
+                <div class="modal-content flow-text">
+                    <h4>Help</h4>
+                    <div class="row">
+                        <p class="col m6 s12">To test with your own schedule, first go to <a href="https://student.studentadmin.uconn.edu/psp/CSPR/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?1&PORTALPARAM_PTCNAV=UC_SS_STUDENT&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=UC_SELF_SERVICE&EOPP.SCLabel=Self-Service&EOPP.SCPTfname=UC_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.UC_SELF_SERVICE.UC_SS_STUDENT&IsFolder=false">Student Admin</a>. Then, copy and paste the weekly schedule table (shown in picture) into the textbox labeled "Schedule" on this page.</p>
+                        <img src="help.png" class="materialboxed col m6 s12" />
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Okay Dokay</a>
+                </div>
+            </div>
+        </div>
     </main>
+
 
     <footer class="footer-copyright" style="background: linear-gradient(to bottom, #536dfe 0%, #758aff 100%);">
         <div class="valign-wrapper container white-text" style="height: 3em;">

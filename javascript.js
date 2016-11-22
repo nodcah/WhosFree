@@ -141,7 +141,7 @@ function updateTable(t = currentTime()) {
     table.html("");
     for (let i = 0; i < schedules.length; i++) {
         let s = schedules[i];
-        table.append(`<div class="row" style="background-color:#e8e4ef;" id="row"` + i + `"><div class="col s2" style="color: ` + (s.isFree(t) ? "green" : "red") + `;">⬤</div><div class = "col s10">` + s.name + `</div></div>`);
+        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (s.isFree(t) ? "green" : "red") + `;">⬤</div><div class = "col s10">` + s.name + `</div></div>`);
     }
 }
 
@@ -160,6 +160,8 @@ function clicked() {
 // ===== MAIN =====
 $(document).ready(function () {
     $('select').material_select();
+    $('.modal').modal();
+    $('.materialboxed').materialbox();
     $('#slide').on("change mousemove", getTime);
 
     updateTable();
