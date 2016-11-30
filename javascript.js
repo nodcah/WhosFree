@@ -64,7 +64,7 @@ function Schedule(name) {
 // Gets current time
 function currentTime() {
     d = new Date();
-    return new Time( /*Number(d.getHours()), Number(d.getMinutes())*/ 13, 0);
+    return new Time(Number(d.getHours()), Number(d.getMinutes()));
 }
 
 // Gets time from range slider
