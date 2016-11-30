@@ -64,7 +64,7 @@ function Schedule(name) {
 // Gets current time
 function currentTime() {
     d = new Date();
-    return new Time(Number(d.getHours()), Number(d.getMinutes()));
+    return new Time( /*Number(d.getHours()), Number(d.getMinutes())*/ 13, 0);
 }
 
 // Gets time from range slider
@@ -84,7 +84,7 @@ function getTime() {
         temp.min = now.min + slideVal;
     }
 
-    $("#time").text(temp.hour % 12 + ":" + (temp.min / 10 < 1 ? "0" + temp.min : temp.min));
+    $("#time").text((temp.hour % 12 == 0 ? 12 : temp.hour % 12) + ":" + (temp.min / 10 < 1 ? "0" + temp.min : temp.min) + (temp.hour < 12 ? " AM" : " PM"));
 
     updateTable(temp);
 
