@@ -153,6 +153,21 @@ function clicked() {
         schedules.push(s)
         $("#schedText").val("");
         $("#nameText").val("");
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            url: 'http://whosfree.nodcah.tk/save.php',
+            data: {
+                scheds: JSON.stringify(schedules)
+            },
+            success: function () {
+                alert("Thanks!");
+            },
+            failure: function () {
+                alert("Error!");
+            }
+        });
     }
     updateTable();
 }
