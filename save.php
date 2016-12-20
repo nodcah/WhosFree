@@ -1,7 +1,16 @@
 <?php
-    $NAME = "schedules.json";
-    $HANDLE = fopen($NAME,'r') or die ('CANT OPEN FILE');;
-    $DATA = fread($HANDLE,filesize($NAME));
-    fclose($HANDLE);
-    echo $DATA;
+   $json = $_POST['scheds'];
+
+   /* sanity check */
+   if (json_decode($json) != null)
+   {
+     $file = fopen('schedules.json','w+');
+     fwrite($file, $json);
+     fclose($file);
+   }
+   else
+   {
+     // user has posted invalid JSON, handle the error
+
+   }
 ?>
