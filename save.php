@@ -11,6 +11,6 @@
    else
    {
      // user has posted invalid JSON, handle the error
-
+       echo "fail"
    }
 ?>

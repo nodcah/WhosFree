@@ -158,13 +158,19 @@ function clicked() {
             url: "save.php",
             data: {
                 scheds: JSON.stringify(schedules)
+            },
+            success: function () {
+                console.log("done");
             }
         });
+        console.log("posted");
 
+    } else {
         // TEST getting json
         jQuery.getJSON("schedules.json", function (d) {
+            console.log("trying to parse");
             console.log(JSON.parse(d));
-        });
+        }, );
     }
     updateTable();
 }
