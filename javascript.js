@@ -22,13 +22,8 @@ const weekdays = {
 function Time(hour, min) {
     this.hour = hour; //24 hour format
     this.min = min;
-
-    this.lt = function (t) {
-        if (this.hour > t.hour) return false;
-        else if (this.hour < t.hour) return true;
-        else return (this.min < t.min);
-    }
 }
+
 
 // Schedule object
 // Creates a schedule for each person
@@ -43,28 +38,54 @@ function Schedule(name) {
         5: [] // fri
     };
     this.name = name; // name of person to whom this schedule belongs
-    //returns whether schedule is free at given time
-    this.isFree = function (t) {
-        d = new Date();
-        let dailyCourses = this.courses[d.getDay()];
-        if (!dailyCourses) return true;
-        for (let course of dailyCourses) {
-            if (course["start"].lt(t) && t.lt(course["end"])) return false;
-        }
-        return true;
-    }
-    this.isEmpty = function () {
-        return this.courses[1].length == 0 && this.courses[2].length == 0 && this.courses[3].length == 0 && this.courses[4].length == 0 && this.courses[5].length == 0;
-    }
+
+
 }
 
 
 // ===== HELPER FUNCTIONS =====
 
+//returns whether schedule is free at given time
+function isFree(schedule, t) {
+    d = new Date();
+    let dailyCourses = schedule.courses[d.getDay()];
+    if (!dailyCourses) return true;
+    for (let course of dailyCourses) {
+        if (lt(course["start"], t) && lt(t, course["end"])) return false;
+    }
+    return true;
+}
+
+function isEmpty(schedule) {
+    return schedule.courses[1].length == 0 && schedule.courses[2].length == 0 && schedule.courses[3].length == 0 && schedule.courses[4].length == 0 && schedule.courses[5].length == 0;
+}
+
+function lt(t1, t2) {
+    if (t1.hour > t2.hour) return false;
+    else if (t1.hour < t2.hour) return true;
+    else return (t1.min < t2.min);
+}
+
+
+
 // Gets current time
 function currentTime() {
     d = new Date();
     return new Time(Number(d.getHours()), Number(d.getMinutes()));
+}
+
+// Deletes index of schedules if pressed down
+function del(i) {
+    var timeoutId = 0;
+
+    $('#person' + i).on('mousedown', function () {
+        timeoutId = setTimeout(function () {
+            schedules.splice(i, 1);
+            getTime();
+        }, 2000);
+    }).on('mouseup mouseleave', function () {
+        clearTimeout(timeoutId);
+    });
 }
 
 // Gets time from range slider
@@ -141,7 +162,8 @@ function updateTable(t = currentTime()) {
     table.html("");
     for (let i = 0; i < schedules.length; i++) {
         let s = schedules[i];
-        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (s.isFree(t) ? "green" : "red") + `;">⬤</div><div class = "col s10">` + s.name + `</div></div>`);
+        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (isFree(s,t) ? "green" : "red") + `;">⬤</div><div class = "col s9">` + s.name + `</div><div class="col s1" id="person` + i + `"><i class="material-icons" style="padding-top:5px;">delete</i></div></div>`);
+        del(i);
     }
 }
 
@@ -150,27 +172,15 @@ function updateTable(t = currentTime()) {
 function clicked() {
     let s = textToSchedule($("#nameText").val(), $("#schedText").val());
     if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val()) && !s.isEmpty()) {
-        schedules.push(s)
+        schedules.push(s);
         $("#schedText ").val("");
         $("#nameText").val("");
-        $.ajax({
-            type: "POST",
-            url: "save.php",
-            data: {
-                scheds: JSON.stringify(schedules)
-            },
-            success: function () {
-                console.log("done");
-            }
-        });
+        $.post("save.php", {
+            scheds: JSON.stringify(schedules)
+        }, function (data) {
+            console.log(data);
+        }, "json");
         console.log("posted");
-
-    } else {
-        // TEST getting json
-        jQuery.getJSON("schedules.json", function (d) {
-            console.log("trying to parse");
-            console.log(JSON.parse(d));
-        }, );
     }
     updateTable();
 }
@@ -181,6 +191,12 @@ $(document).ready(function () {
     $('.modal').modal();
     $('.materialboxed').materialbox();
     $('#slide').on("change mousemove", getTime);
+
+    //Get JSON info
+    console.log("trying to parse");
+    jQuery.getJSON("schedules.json", function (d) {
+        schedules = d;
+    });
 
     updateTable();
     setInterval(getTime, 5000); // Updates time/table every once in a while
