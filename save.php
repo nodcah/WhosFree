@@ -1,7 +1,7 @@
 <?php
-$myFile = "schedules.json";
-$fh = fopen($myFile, 'w') or die("can't open file");
-$stringData = $_GET["scheds"];
-fwrite($fh, $stringData);
-fclose($fh)
+    $NAME = "schedules.json";
+    $HANDLE = fopen($NAME,'r') or die ('CANT OPEN FILE');;
+    $DATA = fread($HANDLE,filesize($NAME));
+    fclose($HANDLE);
+    echo $DATA;
 ?>

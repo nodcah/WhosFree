@@ -151,22 +151,19 @@ function clicked() {
     let s = textToSchedule($("#nameText").val(), $("#schedText").val());
     if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val()) && !s.isEmpty()) {
         schedules.push(s)
-        $("#schedText").val("");
+        $("#schedText ").val("");
         $("#nameText").val("");
         $.ajax({
-            type: "GET",
-            dataType: 'json',
-            async: false,
-            url: 'http://whosfree.nodcah.tk/save.php',
+            type: "POST",
+            url: "save.php",
             data: {
                 scheds: JSON.stringify(schedules)
-            },
-            success: function () {
-                alert("Thanks!");
-            },
-            failure: function () {
-                alert("Error!");
             }
+        });
+
+        // TEST getting json
+        jQuery.getJSON("schedules.json", function (d) {
+            console.log(JSON.parse(d));
         });
     }
     updateTable();
