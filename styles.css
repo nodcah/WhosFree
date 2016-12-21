@@ -12,3 +12,8 @@ main {
 .input-field {
     margin: 0px;
 }
+input[type=range]::-webkit-slider-thumb {
+    height: 1.5em;
+    width: 1.5em;
+    margin-top: -.65em;
+}
