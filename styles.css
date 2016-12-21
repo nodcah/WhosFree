@@ -1,5 +1,12 @@
-html {
-    font-size: 10px;
+@media only screen and (max-width: 510px) {
+    html {
+        font-size: 20px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    html {
+        font-size: 10px;
+    }
 }
 body {
     display: flex;

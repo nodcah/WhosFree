@@ -170,7 +170,7 @@ function updateTable(t = currentTime()) {
     table.html("");
     for (let i = 0; i < schedules.length; i++) {
         let s = schedules[i];
-        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (isFree(s, t) ? "green" : "red") + `;">⬤</div><div class = "col s9">` + s.name + `</div><div class="col s1"><a class="btn" id="person` + i + `"><i class="material-icons" style="font-size:20px;">delete</i></a></div></div>`);
+        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (isFree(s, t) ? "green" : "red") + `;"><i class="material-icons">●</i></div><div class = "col s9">` + s.name + `</div><div class="col s1"><a class="btn flow-text" style="height:1.7em" id="person` + i + `"><i class="material-icons" style="margin-top:-5px;">delete</i></a></div></div>`);
         del(i);
     }
 }
