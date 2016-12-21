@@ -80,17 +80,19 @@ function del(i) {
 
     $('#person' + i).on('mousedown', function () {
         timeoutId = setTimeout(function () {
+            console.log(schedules);
             schedules.splice(i, 1);
+            $.post("save.php", {
+                scheds: JSON.stringify(schedules)
+            }, function (data) {
+                console.log(data);
+            }, "json");
+            console.log("deleted");
+            console.log(schedules);
             getTime();
         }, 2000);
     }).on('mouseup mouseleave', function () {
         clearTimeout(timeoutId);
-        $.post("save.php", {
-            scheds: JSON.stringify(schedules)
-        }, function (data) {
-            console.log(data);
-        }, "json");
-        console.log("deleted");
     });
 }
 
@@ -168,7 +170,7 @@ function updateTable(t = currentTime()) {
     table.html("");
     for (let i = 0; i < schedules.length; i++) {
         let s = schedules[i];
-        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (isFree(s, t) ? "green" : "red") + `;">⬤</div><div class = "col s9">` + s.name + `</div><div class="col s1"><a class="btn" id="person` + i + `"><i class="material-icons" style="font-size:24px;">delete</i></a></div></div>`);
+        table.append(`<div class="row" style="background-color:#f3f2ff;border-radius:3px;" id="row"` + i + `"><div class="col s2" style="color: ` + (isFree(s, t) ? "green" : "red") + `;">⬤</div><div class = "col s9">` + s.name + `</div><div class="col s1"><a class="btn" id="person` + i + `"><i class="material-icons" style="font-size:20px;">delete</i></a></div></div>`);
         del(i);
     }
 }
@@ -177,7 +179,7 @@ function updateTable(t = currentTime()) {
 // Listener for button press
 function clicked() {
     let s = textToSchedule($("#nameText").val(), $("#schedText").val());
-    if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val()) && !s.isEmpty()) {
+    if (/\S/.test($("#nameText").val()) && /\S/.test($("#schedText").val()) && !isEmpty(s)) {
         schedules.push(s);
         $("#schedText ").val("");
         $("#nameText").val("");
@@ -204,7 +206,6 @@ $(document).ready(function () {
         schedules = d;
         updateTable();
     });
-    getTime();
     setInterval(getTime, 5000); // Updates time/table every once in a while
 
 })
