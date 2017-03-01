@@ -20,8 +20,8 @@ const weekdays = {
 // Custom time class
 // hour=hour (int), min=minute (int), am=T for AM & F for PM (boolean)
 function Time(hour, min) {
-    this.hour = hour; //24 hour format
-    this.min = min;
+    this.h = hour; //24 hour format
+    this.m = min;
 }
 
 
@@ -61,9 +61,9 @@ function isEmpty(schedule) {
 }
 
 function lt(t1, t2) {
-    if (t1.hour > t2.hour) return false;
-    else if (t1.hour < t2.hour) return true;
-    else return (t1.min < t2.min);
+    if (t1.h > t2.h) return false;
+    else if (t1.h < t2.h) return true;
+    else return (t1.m < t2.m);
 }
 
 
@@ -102,18 +102,18 @@ function getTime() {
     let now = currentTime();
     let temp = new Time(0, 0);
 
-    if (now.min + slideVal >= 60) {
-        temp.hour = now.hour + 1;
-        temp.min = (now.min + slideVal) - 60;
-    } else if (now.min + slideVal < 0) {
-        temp.hour = now.hour - 1;
-        temp.min = (now.min + slideVal) + 60;
+    if (now.m + slideVal >= 60) {
+        temp.h = now.h + 1;
+        temp.m = (now.m + slideVal) - 60;
+    } else if (now.m + slideVal < 0) {
+        temp.h = now.h - 1;
+        temp.m = (now.m + slideVal) + 60;
     } else {
-        temp.hour = now.hour;
-        temp.min = now.min + slideVal;
+        temp.h = now.h;
+        temp.m = now.m + slideVal;
     }
 
-    $("#time").text((temp.hour % 12 == 0 ? 12 : temp.hour % 12) + ":" + (temp.min / 10 < 1 ? "0" + temp.min : temp.min) + (temp.hour < 12 ? " AM" : " PM"));
+    $("#time").text((temp.h % 12 == 0 ? 12 : temp.h % 12) + ":" + (temp.m / 10 < 1 ? "0" + temp.m : temp.m) + (temp.h < 12 ? " AM" : " PM"));
 
     updateTable(temp);
 
@@ -144,14 +144,14 @@ function textToSchedule(name, text) {
             Number(/\d{2}(?=(?:AM|PM))/.exec(t)));
         t = t.substring(9); // jump to next date
 
-        console.log("t1: " + t1.hour + ":" + t1.min);
+        console.log("t1: " + t1.h + ":" + t1.m);
         console.log("t: " + t);
 
         let t2 = new Time(
             Number(/\d+(?=:)/.exec(t)) + Number((/PM/.test(t) && Number(/\d+(?=:)/.exec(t)) != 12) ? 12 : 0),
             Number(/\d{2}(?=(?:AM|PM))/.exec(t)));
 
-        console.log("t2: " + t2.hour + ":" + t2.min);
+        console.log("t2: " + t2.h + ":" + t2.m);
 
         for (let day of days) { // add times to day
             sched.courses[day].push({
@@ -166,6 +166,16 @@ function textToSchedule(name, text) {
 }
 // Reloads table with given time
 function updateTable(t = currentTime()) {
+    //Get JSON info
+    console.log("trying to parse");
+    $.ajax({
+        dataType: "json",
+        url: "schedules.json",
+        async: false,
+        function (d) {
+            schedules = d;
+        }
+    });
     let table = $("#people");
     table.html("");
     for (let i = 0; i < schedules.length; i++) {
@@ -202,12 +212,6 @@ $(document).ready(function () {
     $('.materialboxed').materialbox();
     $('#slide').on("change mousemove", getTime);
 
-    //Get JSON info
-    console.log("trying to parse");
-    jQuery.getJSON("schedules.json", function (d) {
-        schedules = d;
-        updateTable();
-    });
     setInterval(getTime, 5000); // Updates time/table every once in a while
 
 })
@@ -225,7 +229,7 @@ $(document).ready(function () {
 var test1 = new Time(1, 11, 0);
     var test2 = new Time(1, 11, 50);
     console.log(test1.lt(test2));
-    console.log(currentTime().min);
+    console.log(currentTime().m);
 
     var s = new Schedule();
     console.log(s.isFree(test1));
