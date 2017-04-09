@@ -212,32 +212,15 @@ $(document).ready(function () {
     $('.materialboxed').materialbox();
     $('#slide').on("change mousemove", getTime);
 
+
+
     setInterval(getTime, 5000); // Updates time/table every once in a while
+    $('.title').css('transform') = 'rotateX(90deg)'
+        //    $('.title').style.opacity = 1; // For the nice title transition
+    setTimeout(function () {
+        $('.title').css('transform') = 'rotateX(90deg)';
+    }, 5000)
 
 })
 
-
-
-/*
-
-        console.log(t.match(/\d+(?=:)/));
-        console.log(/AM(?= )/.test(t) ? 0 : 12);
-        console.log(((t.match(/\d+(?=:)/)) - 1) + /AM(?= )/.test(t) ? 0 : 12);
-        console.log(t.match(/\d{2}(?=(?:AM|PM))/));
-
-
-var test1 = new Time(1, 11, 0);
-    var test2 = new Time(1, 11, 50);
-    console.log(test1.lt(test2));
-    console.log(currentTime().m);
-
-    var s = new Schedule();
-    console.log(s.isFree(test1));
-    s.courses[1] = [[test1, test2]];
-    console.log(s.isFree(new Time(1, 11, 12)));
-    console.log(s.isFree(new Time(1, 11, 0)));
-    console.log(s.isFree(new Time(1, 11, 45)));
-    console.log(s.isFree(new Time(1, 10, 12)));
-    console.log(s.isFree(new Time(1, 12, 12)));
-*/
 //End

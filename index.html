@@ -10,8 +10,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <!-- Materialize -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
@@ -23,7 +24,8 @@
 <body>
     <header>
         <div class="valign-wrapper" style="background: rgba(140, 158, 255, 0.4); height: 6em; justify-content: center;">
-            <h3 class="valign" style="color: rgb(34, 26, 47); font-weight:300;">Who's Free?</h3>
+            <h3 class="valign title" style="color: rgb(34, 26, 47); font-weight:300;">Who's Free?</h3>
+            <!--            <h3 class="valign" style="color: rgb(34, 26, 47); font-weight:300;" id="time">Who's Free?</h3>-->
         </div>
     </header>
 
@@ -32,7 +34,7 @@
             <div class="row card-panel grey lighten-3" id="input">
                 <div class="input-field col s4">
                     <!-- Name text box -->
-                    <input type="text" id="nameText" class="validate"></input>
+                    <input type="text" id="nameText" class="validate">
                     <label for="nameText">Name</label>
                 </div>
                 <div class="input-field col s7">
@@ -51,7 +53,6 @@
                         <!-- Slider -->
                         <input id="slide" type="range" min="-60" max="60" value="0" data-orientation="horizontal">
                     </div>
-                    <div class="col s3 l2 flow-text" id="time"></div>
                 </div>
             </div>
             <br />
@@ -63,8 +64,8 @@
                 <div class="modal-content flow-text">
                     <h4>Help</h4>
                     <div class="row">
-                        <p class="col m6 s12">To test with your own schedule, first go to <a href="https://student.studentadmin.uconn.edu/psp/CSPR/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?1&PORTALPARAM_PTCNAV=UC_SS_STUDENT&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=UC_SELF_SERVICE&EOPP.SCLabel=Self-Service&EOPP.SCPTfname=UC_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.UC_SELF_SERVICE.UC_SS_STUDENT&IsFolder=false" target="_blank">Student Admin</a>. Then, copy and paste the weekly schedule table (shown in picture) into the textbox labeled "Schedule" on this page.</p>
-                        <p>Also, press and hold the delete button to delete.</p>
+                        <p class="col m6 s12">To test with your own schedule, first go to <a href="https://student.studentadmin.uconn.edu/psp/CSPR/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?1&PORTALPARAM_PTCNAV=UC_SS_STUDENT&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=UC_SELF_SERVICE&EOPP.SCLabel=Self-Service&EOPP.SCPTfname=UC_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.UC_SELF_SERVICE.UC_SS_STUDENT&IsFolder=false" target="_blank">Student Admin</a>. Then, copy and paste the weekly schedule table (shown in picture) into the textbox labeled "Schedule" on this page.
+                            <br />Also, press and hold the delete button to delete.</p>
                         <img src="help.png" class="materialboxed col m6 s12" />
                     </div>
                 </div>
